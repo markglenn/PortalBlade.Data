@@ -19,7 +19,7 @@ namespace PortalBlade.Data.Tests
         [Test]
         public void Ctor_SetsConfiguration( )
         {
-            var module = new DataModule( Fluently.Configure( ) );
+            var module = new DataModule( configuration );
 
             Assert.IsNotNull( module.SessionFactory );
         }
