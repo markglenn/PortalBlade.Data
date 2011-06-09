@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NHibernate;
 
 namespace PortalBlade.Data.Database
 {
     public class DatabaseStore : IDataStore
     {
-        #region Implementation of IDisposable
+        private readonly ISessionFactory sessionFactory;
 
-        public void Dispose( )
+        public DatabaseStore( ISessionFactory sessionFactory )
         {
-            throw new NotImplementedException( );
+            this.sessionFactory = sessionFactory;
         }
 
-        #endregion
-
-        #region Implementation of IDataStore
+        #region [ Implementation of IDataStore ]
 
         public IRepository<T> Repository<T>( ) where T : class
         {
@@ -25,7 +24,7 @@ namespace PortalBlade.Data.Database
 
         public IDataSession CreateSession( )
         {
-            throw new NotImplementedException( );
+            return new DatabaseSession( this.sessionFactory.OpenSession( ));
         }
 
         public ITransaction CreateTransaction( )
@@ -33,6 +32,16 @@ namespace PortalBlade.Data.Database
             throw new NotImplementedException( );
         }
 
-        #endregion
+        #endregion [ Implementation of IDataStore ]
+
+        #region [ Implementation of IDisposable ]
+
+        public void Dispose( )
+        {
+            throw new NotImplementedException( );
+        }
+
+        #endregion [ Implementation of IDisposable ]
+
     }
 }

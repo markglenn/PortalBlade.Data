@@ -57,10 +57,5 @@ namespace PortalBlade.Data
         /// </summary>
         /// <param name="entity">Entity to evict</param>
         void Evict( T entity );
-
-        /// <summary>
-        /// Deletes all items in the repository
-        /// </summary>
-        void DeleteAll( );
     }
 }
