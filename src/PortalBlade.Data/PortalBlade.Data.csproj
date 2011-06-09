@@ -67,6 +67,7 @@
     <Compile Include="Database\DatabaseRepository.cs" />
     <Compile Include="Database\DatabaseSession.cs" />
     <Compile Include="Database\DatabaseStore.cs" />
+    <Compile Include="Database\DatabaseTransaction.cs" />
     <Compile Include="DataModule.cs" />
     <Compile Include="IDataSession.cs" />
     <Compile Include="IDataStore.cs" />

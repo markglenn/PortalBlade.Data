@@ -77,6 +77,7 @@ namespace PortalBlade.Data.Tests.Database
             person.Name = "New Name";
             repository.Update( person );
 
+            session.Refresh( person );
             Assert.AreEqual( person.Name, repository.First( p => p.Id == person.Id ).Name );
         }
 
@@ -91,8 +92,6 @@ namespace PortalBlade.Data.Tests.Database
             repository.Delete( person );
 
             Assert.IsNull( repository.FirstOrDefault( p => p.Id == person.Id ) );
-
-            tx.Rollback( );
         }
 
         [Test]

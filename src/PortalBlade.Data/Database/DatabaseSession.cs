@@ -11,7 +11,7 @@ namespace PortalBlade.Data.Database
         #region [ Private Members ]
 
         private readonly SessionType sessionType;
-        private ISession session;
+        private readonly ISession session;
 
         #endregion [ Private Members ]
 
