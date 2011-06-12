@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using Ninject;
 using Ninject.Modules;
 
 namespace PortalBlade.Data
@@ -33,7 +33,15 @@ namespace PortalBlade.Data
 
         public override void Load( )
         {
-            this.Kernel.Bind<ISessionFactory>( ).ToConstant( this.sessionFactory );
+            this.Bind<ISessionFactory>( )
+                .ToConstant( this.sessionFactory );
+            
+            this.Bind<ISession>( )
+                .ToMethod( m => this.sessionFactory.OpenSession( ) )
+                .InRequestScope( );
+
+            this.Bind( typeof( IRepository<> ) )
+                .To( typeof( DatabaseRepository<> ) );
         }
 
         #endregion [ Overrides of NinjectModule ]

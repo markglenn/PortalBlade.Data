@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace PortalBlade.Data.Database
+namespace PortalBlade.Data
 {
     public class DatabaseRepository<T> : IRepository<T> where T : class
     {
@@ -20,6 +19,9 @@ namespace PortalBlade.Data.Database
 
         public DatabaseRepository( ISession session )
         {
+            if( session == null ) 
+                throw new ArgumentNullException( "session" );
+
             this.session = session;
             this.queryable = this.session.Query<T>( );
         }
@@ -101,6 +103,11 @@ namespace PortalBlade.Data.Database
         public void Evict( T entity )
         {
             this.session.Evict( entity );
+        }
+
+        public void Refresh( T entity )
+        {
+            this.session.Refresh( entity );
         }
 
         #endregion [ Implementation of IRepository<T> ]

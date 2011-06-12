@@ -73,11 +73,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\DatabaseRepositoryTests.cs" />
-    <Compile Include="Database\DatabaseSessionTests.cs" />
-    <Compile Include="Database\DatabaseStoreTests.cs" />
-    <Compile Include="Database\DatabaseTransactionTests.cs" />
+    <Compile Include="DatabaseRepositoryTests.cs" />
     <Compile Include="DataModuleTests.cs" />
+    <Compile Include="ISessionExtensionsTests.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Linq;
+using FakeItEasy;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
-using PortalBlade.Data.Database;
 using PortalBlade.Data.Tests.Models;
 
-namespace PortalBlade.Data.Tests.Database
+namespace PortalBlade.Data.Tests
 {
     [TestFixture]
     public class DatabaseRepositoryTests
     {
+        #region [ Setup / Teardown Code ]
+
         private readonly FluentConfiguration configuration =
             Fluently.Configure( )
                 .Database( SQLiteConfiguration.Standard.UsingFile( "test.db" ) )
@@ -22,7 +24,7 @@ namespace PortalBlade.Data.Tests.Database
 
         private ISessionFactory sessionFactory;
         private ISession session;
-        private NHibernate.ITransaction tx;
+        private ITransaction transaction;
 
         [TestFixtureSetUp]
         public void SetupFixture( )
@@ -45,16 +47,27 @@ namespace PortalBlade.Data.Tests.Database
         public void Setup( )
         {
             this.session = this.sessionFactory.OpenSession( );
-            this.tx = this.session.BeginTransaction( );
+            this.transaction = this.session.BeginTransaction( );
         }
 
         [TearDown]
         public void TearDown( )
         {
-            this.tx.Rollback( );
-            this.tx.Dispose( );
+            this.transaction.Dispose( );
             this.session.Dispose( );
         }
+
+        #endregion [ Setup / Teardown Code ]
+
+        #region [ Constructor Tests ]
+
+        [Test]
+        public void Ctor_WithNullSession_ThrowsArgumentNullException( )
+        {
+            Assert.Throws<ArgumentNullException>( ( ) => new DatabaseRepository<Person>( null ) );
+        }
+
+        #endregion [ Constructor Tests ]
 
         [Test]
         public void Insert_InsertsModel( )
@@ -109,6 +122,20 @@ namespace PortalBlade.Data.Tests.Database
 
             session.Refresh( person );
             Assert.AreNotEqual( "New Name", repository.First( ).Name );
+        }
+
+        [Test]
+        public void Refresh_RefreshesEntity( )
+        {
+            var fakeSession = A.Fake<ISession>( );
+
+            var repository = new DatabaseRepository<Person>( fakeSession );
+
+            var person = new Person( );
+
+            repository.Refresh( person );
+
+            A.CallTo( ( ) => fakeSession.Refresh( person ) ).MustHaveHappened( );
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,6 +17,22 @@ namespace PortalBlade.Data.Tests
         private readonly FluentConfiguration configuration =
             Fluently.Configure( ).Database( SQLiteConfiguration.Standard.InMemory( ) );
 
+        private DataModule dataModule;
+        private IKernel kernel;
+
+        [SetUp]
+        public void Setup( )
+        {
+            this.dataModule = new DataModule( configuration );
+            this.kernel = new StandardKernel( dataModule );
+        }
+
+        [TearDown]
+        public void TearDown( )
+        {
+            this.kernel.Dispose( );
+        }
+
         [Test]
         public void Ctor_SetsConfiguration( )
         {
@@ -27,12 +44,20 @@ namespace PortalBlade.Data.Tests
         [Test]
         public void InitializesSessionFactory( )
         {
-            var module = new DataModule( configuration );
+            Assert.AreEqual( dataModule.SessionFactory, kernel.Get<ISessionFactory>( ) );
+        }
 
-            using( var kernel = new StandardKernel( module ) )
-            {
-                Assert.AreEqual( module.SessionFactory, kernel.Get<ISessionFactory>( ) );
-            }
+        [Test]
+        public void InitializesSession( )
+        {
+            using( var session = kernel.Get<ISession>( ) )
+                Assert.IsNotNull( session );
+        }
+
+        [Test]
+        public void InitializesRepositoryCreation( )
+        {
+            Assert.IsNotNull( kernel.Get<IRepository<Object>>( ) );
         }
     }
 }
