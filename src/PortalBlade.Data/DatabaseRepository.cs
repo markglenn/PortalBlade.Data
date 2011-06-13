@@ -8,6 +8,10 @@ using NHibernate.Linq;
 
 namespace PortalBlade.Data
 {
+    /// <summary>
+    /// Generic database repository
+    /// </summary>
+    /// <typeparam name="T">Type the the repository stores</typeparam>
     public class DatabaseRepository<T> : IRepository<T> where T : class
     {
         #region [ Private Members ]
@@ -16,7 +20,7 @@ namespace PortalBlade.Data
         private readonly IQueryable<T> queryable;
 
         #endregion [ Private Members ]
-
+        
         public DatabaseRepository( ISession session )
         {
             if( session == null ) 
@@ -58,30 +62,6 @@ namespace PortalBlade.Data
         }
 
         #endregion [ Implementation of IQueryable ]
-
-        #region [ Implementation of IRepository ]
-
-        public void Insert( object entity )
-        {
-            this.Insert( ( T ) entity );
-        }
-
-        public void Update( object entity )
-        {
-            this.Update( ( T ) entity );
-        }
-
-        public void Delete( object entity )
-        {
-            this.Delete( ( T ) entity );
-        }
-
-        public void Evict( object entity )
-        {
-            this.Evict( ( T ) entity );
-        }
-
-        #endregion [ Implementation of IRepository ]
 
         #region [ Implementation of IRepository<T> ]
 

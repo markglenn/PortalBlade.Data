@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalBlade.Data", "src\Por
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalBlade.Data.Tests", "test\PortalBlade.Data.Tests\PortalBlade.Data.Tests.csproj", "{6228F300-3083-4484-ADAB-946589E5933D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalBlade.Example", "src\PortalBlade.Example\PortalBlade.Example.csproj", "{23725AB3-6C89-4E02-8C2C-193D74945614}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{6228F300-3083-4484-ADAB-946589E5933D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6228F300-3083-4484-ADAB-946589E5933D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6228F300-3083-4484-ADAB-946589E5933D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23725AB3-6C89-4E02-8C2C-193D74945614}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23725AB3-6C89-4E02-8C2C-193D74945614}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23725AB3-6C89-4E02-8C2C-193D74945614}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23725AB3-6C89-4E02-8C2C-193D74945614}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
