@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="DatabaseRepository.cs" />
     <Compile Include="DataModule.cs" />
+    <Compile Include="MockDataModule.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISessionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

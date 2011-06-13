@@ -76,6 +76,7 @@
     <Compile Include="DatabaseRepositoryTests.cs" />
     <Compile Include="DataModuleTests.cs" />
     <Compile Include="ISessionExtensionsTests.cs" />
+    <Compile Include="MockDataModuleTests.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
