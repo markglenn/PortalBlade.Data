@@ -18,12 +18,8 @@ namespace PortalBlade.Data.Tests
             var dataModule = new MockDataModule( m => m.FluentMappings.Add<PersonMap>( ) );
 
             using ( var kernel = new StandardKernel( dataModule ) )
-            {
-                using( var session = kernel.Get<ISession>( ) )
-                {
-                    Assert.That( session.Connection.ConnectionString.Contains( ":memory:" ) );
-                }
-            }
+            using ( var session = kernel.Get<ISession>( ) )
+                Assert.That( session.Connection.ConnectionString.Contains( ":memory:" ) );
         }
 
         [Test]

@@ -13,7 +13,7 @@ namespace PortalBlade.Data
     public class MockDataModule : DataModule
     {
         private const string ConnectionString = 
-            "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1";
+            "Data Source=:memory:;Version=3;New=True;Pooling=True;Max Pool Size=1;";
 
         public MockDataModule( Action<MappingConfiguration> mappings )
             : base( BuildConfiguration( mappings ) )
@@ -31,6 +31,7 @@ namespace PortalBlade.Data
 
         private static void BuildSchema( Configuration configuration )
         {
+            configuration.Properties.Add( "connection.release_mode", "on_close" );
             new SchemaExport( configuration ).Create( false, true );
         }
     }
