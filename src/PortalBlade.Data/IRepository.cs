@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PortalBlade.Data
 {
+    /// <summary>
+    /// Data repository
+    /// </summary>
+    /// <typeparam name="T">Model type</typeparam>
     public interface IRepository<T> : IQueryable<T> where T : class
     {
         /// <summary>

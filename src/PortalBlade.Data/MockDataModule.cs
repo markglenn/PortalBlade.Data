@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
@@ -31,7 +27,10 @@ namespace PortalBlade.Data
 
         private static void BuildSchema( Configuration configuration )
         {
+            // Make the connection stay open the life of the test
             configuration.Properties.Add( "connection.release_mode", "on_close" );
+
+            // Export the schema
             new SchemaExport( configuration ).Create( false, true );
         }
     }

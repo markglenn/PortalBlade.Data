@@ -1,11 +1,13 @@
 ﻿using System;
 using FluentNHibernate.Cfg;
 using NHibernate;
-using Ninject;
 using Ninject.Modules;
 
 namespace PortalBlade.Data
 {
+    /// <summary>
+    /// Ninject module used to setup Fluent NHibernate
+    /// </summary>
     public class DataModule : NinjectModule
     {
         #region [ Private Members ]
@@ -23,6 +25,10 @@ namespace PortalBlade.Data
 
         #endregion [ Public Properties ]
 
+        /// <summary>
+        /// Initializes the data module
+        /// </summary>
+        /// <param name="configuration">Fluent NHibernate configuration</param>
         public DataModule( FluentConfiguration configuration )
         {
             this.sessionFactory = configuration
